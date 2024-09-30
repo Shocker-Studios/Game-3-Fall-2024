@@ -1,0 +1,36 @@
+coding 1 week 7
+
+Decorator for "Aggroed Fire"
+1. adding decorator for selector, for "wielding fire". We'll only do this once.
+create new decorator
+override "Perform conditional check AI"
+on BP_enemy_base add boolean "HasFire" and set it true and false in the correct events.
+attach decorator to BTT Spawn Fire, set to Inverse.
+rearrange the BT to use the selector. it's basically useless at the moment, but it'll be better when patrol exists.
+
+Patrol
+create a new bp_patrolRoute that has a spline component
+add it to the scene and give it a few nodes
+create a custom event that increments the patrol index int.
+create a function that returns the world location of the spline point
+in the bp enemy, create a patrolroute variable in the AI category, make it public, select it from the scene.
+create a new task named "btt movealongpatrolroute"
+create an interface named I_enemyAI and give it a function named GetPatrolRoute with a return variable of the type BP_patrolRoute.
+implement the interface in BP_Enemy
+back in the BTT move along patrol route, use the get patrol route (message), check if valid, call AI move to (destination is get spline point at world location). after that, increment patrol route (from the get patrol route node)
+in the BT, Root > new sequence "Passive state" which calls the new BTT.
+
+in BPEnemy, turn off "use fixed braking distance for paths".
+change enemy movement speed when patrolling
+create E_MovementSpeed
+create new function in interface named SetMovementSpeed which accepts an enum and returns a float. 0, 200, 300, 500 for the different speeds: idle, walking, jogging, sprinting.
+
+
+I removed the output float for SetMovementSpeed because we aren't using it right now
+
+add BTD_HasPatrolRoute which calls "GetPatrolRoute" and checks if it's valid, and returns the boolean from that pure funcrtion.
+add decorator to passive state sequence
+I'm not following this guy, I am creating one function that accepts two variables. on the AIC! Not the interface.
+create a function that branches based on the enum state. in both instances, it will set the state, but in the case of "attacking" it will ALSO set the attack target. This will replace the onpossess code, so just set state.
+
+stopped at 34:13, it works as expected. https://www.youtube.com/watch?v=WFV5IewGks8&list=PLNwKK6OwH7eW1n49TW6-FmiZhqRn97cRy&index=2
