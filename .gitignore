@@ -72,3 +72,5 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+Content/AI_Blueprints/AIC_Enemy_Base.uasset
+Content/AI_Blueprints/Tasks/BTT_Spawn_Fire.uasset
